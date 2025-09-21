@@ -357,7 +357,7 @@ def run():
                     st.warning("Your resume score is below 60. We recommend improving your resume.")
             
                 # Automatically send an email to the user
-                    sender_email = "siddhipatil@gmail.com"  # Replace with your email
+                    sender_email = "siddhipatil2632006@gmail.com"  # Replace with your email
                     sender_password = "knlhqgfxbjkqkavf"  # Replace with your email password
                     recipient_email = resume_data['email']  # User's email from resume data
                     subject = "Resume Score Improvement Tips"
