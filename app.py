@@ -1,3 +1,21 @@
+# Download NLTK data first before any other imports
+import nltk
+import ssl
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+# Download required NLTK data
+nltk.download('stopwords', quiet=True)
+nltk.download('punkt', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+nltk.download('maxent_ne_chunker', quiet=True)
+nltk.download('words', quiet=True)
+
 resume_videos = ['https://youtu.be/3agP4x8LYFM','https://youtu.be/fS_t3yS8v5s',
                  'https://youtu.be/aArb68OBFPg','https://youtu.be/h-NuvOeWWh0',
                  'https://youtu.be/BdQniERyw8I','https://youtu.be/Tt08KmFfIYQ',
@@ -35,8 +53,7 @@ from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.mime.base import MIMEBase
 from email import encoders
-import nltk
-nltk.download('stopwords')
+# NLTK data already downloaded at the beginning of the file
 
 def send_email(sender_email, sender_password, recipient_email, subject, message):
     try:
