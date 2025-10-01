@@ -81,10 +81,20 @@ def get_template_download_link(filename, text):
     return href
 
 def fetch_yt_video(link):
-    ydl_opts = {}
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info_dict = ydl.extract_info(link, download=False)
-        return info_dict.get('title', None)
+    ydl_opts = {
+        'format': 'best',   # Automatically pick the best available format
+        'quiet': True,      # Suppress verbose output
+        'nocheckcertificate': True,  # Skip certificate checks if needed
+    }
+
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info_dict = ydl.extract_info(link, download=False)
+            title = info_dict.get('title', None)
+            return title
+    except yt_dlp.utils.DownloadError as e:
+        print(f"Error fetching video info: {e}")
+        return None
 
 def get_table_download_link(df,filename,text):
     """Generates a link allowing the data in a given panda dataframe to be downloaded
